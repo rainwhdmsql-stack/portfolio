@@ -1,0 +1,223 @@
+.hero {
+  display: grid;
+  grid-template-columns: 0.95fr 1.2fr;
+  gap: 26px;
+  align-items: center;
+}
+
+.report {
+  min-height: 620px;
+  padding: 34px;
+}
+
+.sys {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #858995;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 0 7px rgba(225, 6, 19, 0.12);
+  animation: pulse 1.4s infinite;
+}
+
+h1 {
+  margin: 28px 0 22px;
+  font-size: clamp(50px, 6vw, 96px);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+}
+
+.lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #575b66;
+}
+
+.type {
+  display: inline;
+  padding-right: 3px;
+  border-right: 2px solid var(--red);
+}
+
+.data {
+  display: grid;
+  gap: 10px;
+  margin: 28px 0;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+}
+
+.row b {
+  letter-spacing: 0.12em;
+}
+
+.row span {
+  color: #7d818b;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.actions a:nth-child(2) {
+  background: var(--red);
+}
+
+/* Hero 우측의 OS 카드형 시각 요소 */
+.os {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 96px;
+  gap: 12px;
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: var(--radius-md);
+  background: var(--panel);
+  box-shadow: 0 16px 42px rgba(15, 17, 24, 0.09);
+}
+
+.tile.black {
+  background: var(--black);
+  color: var(--white);
+}
+
+.tile.red {
+  background: var(--red);
+  color: var(--white);
+}
+
+.tile.circle {
+  aspect-ratio: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--radius-pill);
+}
+
+.w2 { grid-column: span 2; }
+.w3 { grid-column: span 3; }
+.h2 { grid-row: span 2; }
+
+.label {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #8c909a;
+}
+
+.black .label,
+.red .label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.tile strong {
+  font-size: 25px;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.small {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #7b7f89;
+}
+
+.black .small,
+.red .small {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.scanbar {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #fff 0 54%, #e6e7eb 54% 76%, var(--red) 76%);
+  animation: blink 1.1s infinite;
+}
+
+.ai-orb {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background:
+    radial-gradient(circle, #fff 0 3px, transparent 4px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.04) 60%, transparent);
+  animation: breathe 2s infinite;
+}
+
+.wave {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.wave i {
+  display: block;
+  width: 4px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  animation: wave 1s infinite;
+}
+
+.wave i:nth-child(2) { animation-delay: 0.1s; }
+.wave i:nth-child(3) { animation-delay: 0.2s; }
+.wave i:nth-child(4) { animation-delay: 0.3s; }
+.wave i:nth-child(5) { animation-delay: 0.4s; }
+
+.meter {
+  height: 54px;
+  background: repeating-linear-gradient(90deg, var(--ink) 0 5px, transparent 5px 8px);
+}
+
+/* Hero 배경의 작은 시스템 로그 */
+.system-rain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: .42;
+}
+
+.system-rain span {
+  position: absolute;
+  font-size: 10px;
+  color: rgba(16, 17, 22, .34);
+  animation: drift 11s linear infinite;
+}
+
+.system-rain span:nth-child(1) { top: 18%; left: 7%; }
+.system-rain span:nth-child(2) { top: 29%; left: 72%; animation-delay: -3s; }
+.system-rain span:nth-child(3) { top: 76%; left: 12%; animation-delay: -6s; }
+.system-rain span:nth-child(4) { top: 66%; left: 74%; animation-delay: -9s; }

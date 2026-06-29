@@ -1,0 +1,139 @@
+.floating-curio {
+  position: fixed;
+  right: 28px;
+  bottom: 26px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px 10px 10px;
+  background: rgba(255,255,255,.65);
+  box-shadow: 0 18px 50px rgba(16,17,22,.16);
+  backdrop-filter: blur(16px);
+}
+.floating-curio em { font-style: normal; font-weight: 900; color: var(--ink); }
+.curio-orb {
+  width: 88px; height: 88px; border-radius: 50%;
+  position: relative; display: grid; place-items: center;
+  background: radial-gradient(circle, #fff 0 10%, rgba(124,92,255,.22) 18%, rgba(124,92,255,.72) 38%, #111 68%);
+  box-shadow: 0 0 0 12px rgba(124,92,255,.10), 0 0 42px rgba(124,92,255,.32);
+}
+.curio-orb span { width: 34%; height: 34%; border-radius: 50%; background: rgba(255,255,255,.92); box-shadow: 0 0 24px white; }
+.curio-orb i { position:absolute; inset:16px; border-radius:50%; border:1px solid rgba(255,255,255,.55); animation: pulse 2.2s ease-in-out infinite; }
+.small-orb { width: 46px; height: 46px; }
+.floating-curio.speaking .curio-orb { animation: orbSpeak .8s ease-in-out infinite alternate; }
+.voice-caption {
+  position: fixed;
+  top: 108px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-18px);
+  z-index: 60;
+  width: min(860px, calc(100vw - 40px));
+  display: grid;
+  grid-template-columns: 66px 1fr;
+  gap: 18px;
+  align-items: center;
+  padding: 18px 24px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,.86), rgba(244,240,255,.72));
+  color: var(--ink);
+  border: 1px solid var(--curio-line);
+  box-shadow: 0 26px 70px rgba(124,92,255,.16);
+  backdrop-filter: blur(22px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease, transform .24s ease;
+}
+.voice-caption.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.voice-icon { width: 58px; height: 58px; border-radius: 50%; background: var(--curio); display:grid; place-items:center; box-shadow: 0 0 0 10px rgba(124,92,255,.14); }
+.mini-wave { display:flex; gap:4px; align-items:center; height:28px; }
+.mini-wave i { width:4px; border-radius:10px; background:white; animation: bars .7s ease-in-out infinite alternate; }
+.mini-wave i:nth-child(1){height:18px}.mini-wave i:nth-child(2){height:30px;animation-delay:.1s}.mini-wave i:nth-child(3){height:23px;animation-delay:.2s}.mini-wave i:nth-child(4){height:14px;animation-delay:.3s}
+.caption-label { display:block; color:var(--curio); opacity:1; font-size:11px; margin-bottom:6px; }
+.caption-text { margin:0; font-size:18px; line-height:1.55; font-weight:900; color:var(--ink); }
+
+/* ------------------------------------------------------------
+   CURIO Quick Guide
+   - 하단 CURIO 버튼은 실제 챗봇이 아니라 선택형 안내 허브로 사용
+   - 상단 메뉴명과 겹치지 않도록 사용자의 질문 문장으로 구성
+------------------------------------------------------------ */
+.curio-quick-guide {
+  position: fixed;
+  right: 28px;
+  bottom: 96px;
+  z-index: 46;
+  width: min(360px, calc(100vw - 32px));
+  padding: 20px;
+  border-radius: 28px;
+  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(244,240,255,.84));
+  border: 1px solid var(--curio-line);
+  box-shadow: 0 30px 90px rgba(124,92,255,.20), 0 18px 50px rgba(16,17,22,.12);
+  backdrop-filter: blur(22px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px) scale(.97);
+  transition: opacity .24s ease, transform .24s ease;
+}
+.curio-quick-guide.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.quick-guide-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.quick-guide-close {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(124,92,255,.18);
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+  color: var(--curio);
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.curio-quick-guide h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  letter-spacing: -.04em;
+  color: var(--ink);
+}
+.curio-quick-guide p {
+  margin: 0 0 18px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+.quick-guide-actions {
+  display: grid;
+  gap: 10px;
+}
+.quick-guide-actions button {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(124,92,255,.16);
+  background: rgba(255,255,255,.62);
+  color: var(--ink);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  cursor: pointer;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.quick-guide-actions button:hover {
+  transform: translateY(-2px);
+  background: rgba(124,92,255,.10);
+  border-color: rgba(124,92,255,.32);
+  box-shadow: 0 12px 26px rgba(124,92,255,.13);
+}
+.floating-curio[aria-expanded="true"] {
+  box-shadow: 0 22px 70px rgba(124,92,255,.24);
+}

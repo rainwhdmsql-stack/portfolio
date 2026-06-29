@@ -1,0 +1,23 @@
+:root {
+  --bg: #eef0f4;
+  --ink: #101116;
+  --muted: #676d78;
+  --line: rgba(16,17,22,.08);
+  --panel: rgba(255,255,255,.58);
+  --dark: #15161b;
+  --red: #e10600;
+  --red-dark: #b80500;
+  --curio: #7C5CFF;
+  --curio-blue: #5B8CFF;
+  --curio-soft: rgba(124,92,255,.12);
+  --curio-line: rgba(124,92,255,.24);
+  --white: #fff;
+  --shadow: 0 30px 80px rgba(16,17,22,.13);
+  --radius-lg: 36px;
+  --radius-md: 24px;
+  --radius-sm: 999px;
+  --font: Inter, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: "SFMono-Regular", "Roboto Mono", Consolas, monospace;
+  --section-x: clamp(24px, 5vw, 72px);
+  --section-y: clamp(96px, 12vw, 150px);
+}

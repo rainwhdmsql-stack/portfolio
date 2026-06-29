@@ -1,0 +1,237 @@
+.project-head { display:grid; grid-template-columns: 1fr auto; gap:32px; align-items:end; }
+.archive-count { width:150px; height:150px; border-radius:36px; display:grid; place-items:center; align-content:center; background:var(--dark); color:white; box-shadow:var(--shadow); }
+.archive-count b { font-size:54px; letter-spacing:-.08em; }
+.archive-count span { font-size:10px; opacity:.6; }
+.filter-wrap { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 28px; padding:10px; width:max-content; max-width:100%; border-radius:999px; background:rgba(255,255,255,.58); border:1px solid rgba(255,255,255,.85); backdrop-filter:blur(16px); box-shadow:0 18px 50px rgba(16,17,22,.08); }
+.filter-chip { border:0; border-radius:999px; min-height:44px; padding:0 20px; background:transparent; color:#6a707a; font-weight:1000; transition:background .25s ease, color .25s ease, transform .25s ease; }
+.filter-chip:hover { transform:translateY(-2px); }
+.filter-chip.active { background:var(--curio); color:white; }
+.project-grid { display:grid; grid-template-columns: repeat(4, 1fr); gap:18px; }
+.project-card { padding:0; overflow:hidden; cursor:pointer; min-height:390px; display:flex; flex-direction:column; }
+.project-mockup { height:188px; position:relative; overflow:hidden; border-radius:34px 34px 0 0; background:linear-gradient(135deg, #14151b, #e9ebf0); }
+.mockup-screen { position:absolute; inset:28px 24px 20px; border-radius:22px; background:rgba(255,255,255,.86); box-shadow:0 18px 45px rgba(0,0,0,.18); transform:scale(1); transition:transform .45s ease; overflow:hidden; }
+.project-card:hover .mockup-screen { transform:scale(1.1); }
+.project-card:hover .project-mockup::after { opacity:1; transform:translateY(0); }
+.project-mockup::after { content:'CURIO PREVIEW'; position:absolute; left:18px; bottom:16px; padding:8px 12px; border-radius:999px; background:rgba(16,17,22,.82); color:white; font-family:var(--mono); font-size:10px; font-weight:900; letter-spacing:.08em; opacity:0; transform:translateY(8px); transition:.3s ease; }
+.mockup-bar { height:22px; background:var(--dark); opacity:.92; }
+.mockup-line { height:10px; border-radius:99px; background:#111; opacity:.16; margin:18px; }
+.mockup-line.short { width:48%; }
+.mockup-blocks { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; padding:0 18px 18px; }
+.mockup-blocks i { height:48px; border-radius:14px; background:rgba(225,6,0,.12); }
+.project-body { padding:28px; display:flex; flex:1; flex-direction:column; justify-content:space-between; }
+.project-body h3 { margin:18px 0 10px; font-size:26px; line-height:1.08; letter-spacing:-.05em; }
+.project-summary { color:var(--muted); line-height:1.65; font-weight:700; margin:0; }
+.project-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:22px; }
+.tag { font-family:var(--mono); font-size:10px; font-weight:900; letter-spacing:.08em; color:var(--curio); text-transform:uppercase; }
+.project-card.is-hidden { display:none; }
+.project-grid.filtering .project-card { animation: cardFilter .36s ease both; }
+.project-modal { position:fixed; inset:0; z-index:80; display:none; }
+.project-modal.open { display:block; }
+.modal-backdrop { position:absolute; inset:0; background:rgba(16,17,22,.42); backdrop-filter:blur(18px); }
+.browser-window { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) scale(.96); width:min(90vw, 1180px); height:86vh; border-radius:26px; background:rgba(244,246,249,.94); box-shadow:0 48px 150px rgba(0,0,0,.36); overflow:hidden; opacity:0; animation: modalIn .28s ease forwards; border:1px solid rgba(255,255,255,.85); }
+.browser-topbar { height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 18px 0 24px; background:rgba(255,255,255,.7); border-bottom:1px solid var(--line); }
+.browser-title { font-size:11px; font-weight:900; color:#777d88; }
+.browser-controls { display:flex; gap:8px; }
+.browser-controls button { width:30px; height:30px; border:0; border-radius:50%; background:var(--dark); color:white; font-weight:900; }
+.browser-controls button:last-child { background:var(--red); }
+.modal-content { height:calc(100% - 58px); overflow:auto; display:grid; grid-template-columns: 1.4fr .72fr; gap:24px; padding:28px; }
+.modal-main, .curio-summary { border-radius:28px; background:rgba(255,255,255,.62); border:1px solid rgba(255,255,255,.9); padding:28px; }
+.modal-hero-mockup { height:260px; border-radius:24px; overflow:hidden; background:linear-gradient(135deg, #15161b, #f0f2f6); margin-bottom:22px; }
+.modal-hero-mockup .mockup-screen { position:relative; inset:auto; width:80%; height:190px; margin:34px auto; }
+.modal-meta { display:flex; gap:8px; flex-wrap:wrap; color:#767c87; font-size:10px; font-weight:900; }
+.modal-meta span { padding:8px 12px; border-radius:999px; background:#eef0f4; }
+.modal-main h3 { margin:18px 0 12px; font-size:44px; letter-spacing:-.07em; line-height:.95; }
+.modal-main > p { color:var(--muted); font-size:18px; line-height:1.7; }
+.modal-sections { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+.modal-sections div { background:#f4f5f8; border-radius:22px; padding:20px; }
+.modal-sections b { display:block; margin-bottom:10px; color:var(--red); font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+.modal-sections p { margin:0; color:#606671; line-height:1.65; font-weight:700; }
+.curio-summary { background:linear-gradient(135deg, rgba(21,22,27,.96), rgba(38,32,66,.95)); color:white; align-self:start; position:sticky; top:0; border-color:rgba(124,92,255,.22); }
+.curio-summary h4 { margin:18px 0 16px; font-size:32px; letter-spacing:-.06em; }
+.curio-summary p { margin:0; color:#d9dce4; line-height:1.8; font-weight:750; white-space:pre-line; min-height:160px; }
+.curio-summary.is-briefing p::after { content:""; display:inline-block; width:2px; height:1em; margin-left:4px; background:var(--curio); vertical-align:-2px; animation:blink .8s infinite; }
+
+/* 모달 내부 CURIO 요약 카드가 자막 브리핑과 연결되어 보이도록 강조 */
+.curio-summary.is-briefing { box-shadow:0 0 0 8px rgba(124,92,255,.10), 0 26px 80px rgba(16,17,22,.24); }
+.curio-summary.is-briefing::after { content:'GENERATING BRIEFING'; display:inline-flex; margin-top:22px; padding:8px 12px; border-radius:999px; background:var(--curio); color:white; font-family:var(--mono); font-size:10px; font-weight:900; letter-spacing:.08em; }
+
+/* 이전 버전의 모달 자막은 사용하지 않음: 상세창 내부 CURIO ANALYSIS 카드 자체가 실시간 브리핑 역할을 함 */
+.modal-voice-caption {
+  display: none !important;
+}
+
+.modal-voice-caption.deprecated {
+  position: absolute;
+  top: 74px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  z-index: 4;
+  width: min(760px, calc(100% - 72px));
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 15px 20px;
+  border-radius: 24px;
+  background: rgba(21,22,27,.96);
+  color: white;
+  box-shadow: 0 22px 58px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease, transform .24s ease;
+}
+.modal-voice-caption.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.modal-voice-caption .voice-icon {
+  width: 50px;
+  height: 50px;
+}
+.modal-voice-caption .caption-text {
+  font-size: 16px;
+}
+
+/* ============================================================
+   CURIO Final Update: Project Archive pagination + window controls
+   - Hero/Entry 영역은 기존 코드 유지
+   - 프로젝트 카드는 한 화면 최대 6개 표시
+   - 상세 페이지는 데스크톱 새 창 형식으로 동작
+   ============================================================ */
+.project-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.project-card {
+  min-height: 470px;
+  border-radius: 24px;
+}
+
+.project-mockup {
+  height: 300px;
+  border-radius: 24px 24px 0 0;
+}
+
+.project-body {
+  padding: 24px;
+}
+
+.project-body h3 {
+  font-size: 22px;
+  margin: 14px 0 8px;
+}
+
+.project-summary {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.project-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.page-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(42, 42, 42, .12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .72);
+  color: var(--dark);
+  font-weight: 1000;
+  box-shadow: 0 16px 40px rgba(16,17,22,.08);
+  cursor: pointer;
+  transition: transform .22s ease, background .22s ease, opacity .22s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--curio);
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: .36;
+  cursor: not-allowed;
+}
+
+.page-status {
+  min-width: 82px;
+  text-align: center;
+  color: #747985;
+  font-size: 11px;
+  font-weight: 1000;
+  letter-spacing: .08em;
+}
+
+.project-modal.minimized {
+  display: none;
+}
+
+.browser-window.maximized {
+  width: calc(100vw - 32px);
+  height: calc(100vh - 32px);
+  border-radius: 20px;
+}
+
+.browser-controls button {
+  cursor: pointer;
+}
+
+.browser-controls button:hover {
+  transform: translateY(-1px);
+}
+
+.window-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 90;
+  transform: translateX(-50%) translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  min-width: 280px;
+  padding: 14px 18px;
+  border: 1px solid rgba(124,92,255,.28);
+  border-radius: 18px;
+  background: rgba(26,26,26,.96);
+  color: white;
+  box-shadow: 0 24px 72px rgba(0,0,0,.28);
+  text-align: left;
+  transition: transform .26s ease, opacity .26s ease;
+}
+
+.window-dock.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.window-dock span {
+  display: block;
+  margin-bottom: 4px;
+  color: #b8b8b8;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.window-dock b {
+  display: block;
+  font-size: 15px;
+}
+
+@media (max-width: 980px) {
+  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .project-mockup { height: 240px; }
+}
+
+@media (max-width: 640px) {
+  .project-grid { grid-template-columns: 1fr; }
+  .project-card { min-height: 420px; }
+  .project-mockup { height: 250px; }
+}

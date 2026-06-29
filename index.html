@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CURIO Portfolio | 조현정</title>
+  <link rel="stylesheet" href="./css/00-root.css" />
+  <link rel="stylesheet" href="./css/01-base.css" />
+  <link rel="stylesheet" href="./css/02-navigation.css" />
+  <link rel="stylesheet" href="./css/03-ai-interface.css" />
+  <link rel="stylesheet" href="./css/04-entry-hero.css" />
+  <link rel="stylesheet" href="./css/05-about.css" />
+  <link rel="stylesheet" href="./css/06-projects.css" />
+  <link rel="stylesheet" href="./css/08-contact.css" />
+  <link rel="stylesheet" href="./css/09-animations.css" />
+  <link rel="stylesheet" href="./css/10-responsive.css" />
+</head>
+<body>
+  <div class="boot" id="boot" aria-hidden="true">
+    <div class="boot-inner">
+      <div class="boot-core"><b>CURIO</b></div>
+      <h2>포트폴리오 자료를<br />정리하는 중</h2>
+      <div class="boot-log mono">
+        <p>디자이너 기록을 확인하는 중...</p>
+        <p>프로젝트 보관함을 여는 중...</p>
+        <p>사용 도구 기록을 정리하는 중...</p>
+        <p>CURIO의 말투를 고르는 중...</p>
+      </div>
+      <div class="bootbar"><span></span></div>
+    </div>
+  </div>
+
+  <div class="entry" id="entry" aria-modal="true" role="dialog">
+    <canvas id="shapeWaveCanvas" class="shape-wave-canvas" aria-hidden="true"></canvas>
+    <div class="entry-bg-log mono" aria-hidden="true">
+      <span>경험 기록 확인</span>
+      <span>프로젝트 정리</span>
+      <span>읽기 전 메모 준비</span>
+      <span>자료 준비 완료</span>
+    </div>
+    <div class="entry-card" data-shape-mask>
+      <div class="curio-orb entry-orb" aria-hidden="true"><span></span><i></i></div>
+      <p class="entry-kicker mono">자료 정리 담당 CURIO</p>
+      <h1>CURIO</h1>
+      <p class="entry-desc">
+        안녕하세요. 저는 <b>CURIO</b>입니다.<br />
+        조현정 디자이너의 작업과 경험을 읽고 정리하는 AI 큐레이터입니다.
+      </p>
+      <p class="entry-question">포트폴리오에 진입하시겠습니까?</p>
+      <button class="entry-btn" id="enterBtn" type="button">포트폴리오 열기</button>
+    </div>
+  </div>
+
+  <nav class="nav" id="nav">
+    <a class="logo" href="#hero">Prolog</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <button class="floating-curio" id="floatingCurio" type="button" aria-label="CURIO quick guide 열기" aria-expanded="false" aria-controls="curioQuickGuide">
+    <div class="curio-orb small-orb"><span></span><i></i></div>
+    <em class="mono">CURIO</em>
+  </button>
+
+  <div class="curio-quick-guide" id="curioQuickGuide" aria-hidden="true">
+    <div class="quick-guide-head">
+      <span class="chip curio-chip">CURIO 빠른 길잡이</span>
+      <button class="quick-guide-close" id="quickGuideClose" type="button" aria-label="CURIO quick guide 닫기">×</button>
+    </div>
+    <h3>무엇이 궁금하신가요?</h3>
+    <p>궁금한 문장을 선택하면 CURIO가 해당 자료 위치로 안내합니다.</p>
+    <div class="quick-guide-actions">
+      <button type="button" data-guide-target="about" data-guide-say="조현정 디자이너의 프로필을 큐레이션합니다. 문제를 바라보는 방식과 사용 가능한 툴을 확인해 주세요.">어떤 디자이너인가요?</button>
+      <button type="button" data-guide-target="projects" data-guide-say="프로젝트 아카이브를 열었습니다. 디자인, 코딩, 팀 프로젝트 기준으로 기록을 탐색할 수 있습니다.">어떤 프로젝트를 진행했나요?</button>
+      <button type="button" data-guide-target="contact" data-guide-say="협업 및 채용 문의를 위한 연결 정보를 확인했습니다.">함께 일할 수 있나요?</button>
+      <button type="button" data-guide-target="hero" data-guide-say="포트폴리오의 시작 지점으로 돌아갑니다. CURIO 브리핑을 다시 확인해 주세요.">처음부터 다시 보기</button>
+    </div>
+  </div>
+
+  <div class="voice-caption" id="caption" role="status" aria-live="polite">
+    <div class="voice-icon"><div class="mini-wave"><i></i><i></i><i></i><i></i></div></div>
+    <div>
+      <b class="caption-label mono">읽기 전 메모</b>
+      <p class="caption-text" id="captionText"></p>
+    </div>
+  </div>
+
+
+  <aside class="report-progress report-status" id="reportProgress" aria-label="CURIO report status">
+    <div class="report-progress-head">
+      <span class="mono">CURIO LOG</span>
+      <b id="reportProgressMode">진행 상태</b>
+    </div>
+    <ul class="report-progress-list report-status-list">
+      <li data-progress-step="profile" data-state="pending"><i></i><span>디자이너 기록</span></li>
+      <li data-progress-step="experience" data-state="pending"><i></i><span>경험 해석</span></li>
+      <li data-progress-step="archive" data-state="pending"><i></i><span>프로젝트 보관함</span></li>
+      <li data-progress-step="summary" data-state="pending"><i></i><span>마무리 정리</span></li>
+    </ul>
+    <div class="report-complete-badge" id="reportCompleteBadge" aria-hidden="true">기록 정리 완료</div>
+    <p id="reportProgressStatus">CURIO가 자료를 확인하고 있습니다.</p>
+  </aside>
+
+  <section id="hero" class="section hero" data-ai="조현정님의 포트폴리오에 진입하셨습니다. CURIO가 작업과 경험을 큐레이션합니다.">
+    <div class="system-rain mono" aria-hidden="true">
+      <span>Analyzing 디자이너 기록</span><span>프로젝트 사례 정리</span><span>읽기 전 메모 준비</span><span>프로젝트 보관함 Ready</span>
+    </div>
+    <div class="panel report reveal">
+      <div>
+        <div class="sys"><span class="dot"></span> CURIO PORTFOLIO BRIEFING</div>
+        <h1>포트폴리오를<br />읽고 정리한<br /><span class="red">기록</span></h1>
+        <p class="lead"><span id="typeText" class="type"></span></p>
+        <div class="data mono">
+          <div class="row"><b>TARGET</b><span>HYEONJEONG JO</span></div>
+          <div class="row"><b>ROLE</b><span>UX/UI DESIGNER</span></div>
+          <div class="row"><b>CURATOR</b><span>CURIO</span></div>
+          <div class="row"><b>STATUS</b><span>PROFILE GENERATED</span></div>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="#about" data-say="디자이너 프로필을 큐레이션합니다. 사고 방식과 사용 가능 툴을 확인해 주세요.">디자이너 분석 보기</a>
+        <a href="#projects" data-say="프로젝트 아카이브를 불러옵니다. 필터를 선택하면 CURIO가 해당 기록을 다시 정리합니다.">프로젝트 데이터 보기</a>
+        <a href="#contact" data-say="협업 연결 정보를 확인합니다. 문의 채널로 이동합니다.">연결 정보 보기</a>
+      </div>
+    </div>
+
+    <div class="os reveal" aria-label="CURIO dashboard summary">
+      <div class="tile black w2 dashboard-main">
+        <span class="label">CURIO LOG</span>
+        <strong>Curating<br />Designer<br />Profile</strong>
+        <div class="scanbar"></div>
+      </div>
+      <div class="tile dashboard-focus">
+        <span class="label">FOCUS</span>
+        <strong>User<br />Flow</strong>
+      </div>
+      <div class="tile red w2 dashboard-experience">
+        <span class="label">EXPERIENCE</span>
+        <strong>Marketing<br />Customer<br />Service</strong>
+      </div>
+      <div class="tile black dashboard-role">
+        <span class="label">MAIN ROLE</span>
+        <strong>UX/UI<br />Designer</strong>
+      </div>
+      <div class="tile circle dashboard-project">
+        <span class="label">PROJECT</span>
+        <strong>09</strong>
+        <em class="project-records mono">RECORDS</em>
+      </div>
+      <div class="tile w2 h2 dashboard-briefing">
+        <span class="label">GENERATED BRIEFING</span>
+        <div class="wave"><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="briefing-meta mono">AI GENERATED SUMMARY</p>
+        <p class="small">사용자가 선택한 주제에 맞춰 관련 프로젝트를 선별하여 안내합니다.</p>
+      </div>
+      <div class="tile red w2 dashboard-type">
+        <span class="label">PROJECT TYPE</span>
+        <strong>Design + Code</strong>
+      </div>
+    </div>
+
+    <aside class="curio-guide-panel reveal" id="curioGuidePanel" aria-label="CURIO guide">
+      <div class="guide-main">
+        <span class="chip curio-chip">CURIO GUIDE</span>
+        <p class="guide-intro"><b>CURIO</b>는 조현정 디자이너의 경험과 프로젝트를 분석하고 안내하는 <span>AI 큐레이터</span>입니다.</p>
+      </div>
+      <div class="guide-divider" aria-hidden="true"></div>
+      <div class="guide-info">
+        <h3>WHAT CURIO DOES ?</h3>
+        <ul>
+          <li>자료 살펴보기</li>
+          <li>핵심 메모 남기기</li>
+          <li>필요한 기록으로 이동</li>
+        </ul>
+      </div>
+      <div class="guide-divider" aria-hidden="true"></div>
+      <p class="guide-bottom">다음 섹션부터 우측 하단 <b>CURIO</b> 버튼을 통해 원하는 정보를 확인할 수 있습니다.</p>
+    </aside>
+  </section>
+
+  <section id="about" class="section" data-ai="디자이너 프로필을 큐레이션했습니다. 성과 데이터를 분석하던 마케팅 경험을 바탕으로 사용자의 흐름과 문제의 본질을 설계합니다.">
+    <p class="section-kicker mono reveal">CURIO ANALYSIS</p>
+    <h2 class="section-title reveal">About<br />HyeonJeong</h2>
+    <p class="section-lead reveal">성과를 분석하던 마케터에서 사용자 경험을 설계하는<br /><span>UX/UI 디자이너로 성장했습니다.</span></p>
+    <div class="cards about-cards">
+      <div class="card reveal"><span class="chip">BACKGROUND</span><h3>Performance Marketing</h3><p>사용자 행동과 데이터 분석 경험은 문제의 원인을 구조적으로 파악하고 개선 방향을 설계하는 기반이 되었습니다.</p></div>
+      <div class="card reveal"><span class="chip">PERSPECTIVE</span><h3>사용자의 흐름을 설계하는 디자이너</h3><p>정보 구조, 이동 경로, 인터랙션을 연결해 사용자가 자연스럽게 목적에 도달할 수 있는 경험을 설계합니다.</p></div>
+      <div class="card reveal"><span class="chip">APPROACH</span><h3>문제의 본질을 파악하는 디자이너</h3><p>단순히 보기 좋은 화면보다 문제가 발생한 구조와 원인을 먼저 정리하고, 해결 방향을 설계합니다.</p></div>
+    </div>
+    <div class="tool-panel reveal">
+      <div class="tool-copy">
+        <span class="chip">CURIO 자료</span>
+        <h3>프로젝트의 목적과 상황에 맞는 도구를 선택하여 사용합니다.</h3>
+      </div>
+      <div class="tool-grid" aria-label="사용 가능 툴 목록">
+        <div class="tool-icon" data-tool-category="Design"><b>Ai</b><span>Illustrator</span></div>
+        <div class="tool-icon" data-tool-category="Design"><b>Ps</b><span>Photoshop</span></div>
+        <div class="tool-icon" data-tool-category="Design"><b>Fg</b><span>Figma</span></div>
+        <div class="tool-icon" data-tool-category="Dev"><b>GH</b><span>GitHub</span></div>
+        <div class="tool-icon" data-tool-category="Dev"><b>VS</b><span>VSCode</span></div>
+        <div class="tool-icon" data-tool-category="Analytics"><b>GA</b><span>Google Analytics</span></div>
+        <div class="tool-icon" data-tool-category="Analytics"><b>LS</b><span>Looker Studio</span></div>
+        <div class="tool-icon" data-tool-category="AI"><b>∞</b><span>Meta ads</span></div>
+        <div class="tool-icon" data-tool-category="AI"><b>Mj</b><span>Midjourney</span></div>
+        <div class="tool-icon" data-tool-category="Collab"><b>No</b><span>Notion</span></div>
+        <div class="tool-icon" data-tool-category="Collab"><b>Sl</b><span>Slack</span></div>
+        <div class="tool-icon" data-tool-category="AI"><b>GPT</b><span>Chat-GPT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section" data-ai="프로젝트 아카이브를 확인했습니다. 필터를 선택하면 CURIO가 해당 유형의 기록을 다시 큐레이션합니다.">
+    <div class="project-head reveal">
+      <div>
+        <p class="section-kicker mono">CURIO ARCHIVE</p>
+        <h2 class="section-title">프로젝트 보관함</h2>
+        <p class="section-lead">각 프로젝트의 기획, 디자인, 개발 과정을 하나의 기록으로 정리했습니다.<br /><span>카드를 선택하면 상세 브리핑 창을 확인할 수 있습니다.</span></p>
+      </div>
+      <div class="archive-count mono"><b id="projectCount">09</b><span>기록 FOUND</span></div>
+    </div>
+
+    <div class="filter-wrap reveal" aria-label="프로젝트 필터">
+      <button class="filter-chip active" type="button" data-filter="all">All</button>
+      <button class="filter-chip" type="button" data-filter="design">Design</button>
+      <button class="filter-chip" type="button" data-filter="coding">Coding</button>
+      <button class="filter-chip" type="button" data-filter="team">Team Project</button>
+    </div>
+
+    <div class="project-grid" id="projectGrid" aria-live="polite"></div>
+
+    <div class="project-pagination reveal" id="projectPagination" aria-label="프로젝트 페이지 이동">
+      <button class="page-btn" id="prevProjectPage" type="button" aria-label="이전 프로젝트 페이지">&lt;</button>
+      <span class="page-status mono" id="projectPageStatus">01 / 01</span>
+      <button class="page-btn" id="nextProjectPage" type="button" aria-label="다음 프로젝트 페이지">&gt;</button>
+    </div>
+  </section>
+
+  <section id="contact" class="section" data-ai="협업 또는 채용 문의를 위한 연결 정보를 확인했습니다.">
+    <p class="section-kicker mono reveal">CURIO SUMMARY</p>
+    <h2 class="section-title reveal">End Of Report</h2>
+    <p class="section-lead reveal">CURIO의 포트폴리오 브리핑이 종료되었습니다.<br /><span>협업과 기회가 있다면 편하게 연락해주세요.</span></p>
+    <div class="contact-box reveal">
+      <span class="chip contact-chip">CONTACT</span>
+      <h3>Let's Collaborate</h3>
+      <p class="contact-message">좋은 경험은 좋은 협업에서 시작됩니다.</p>
+      <div class="contact-profile">
+        <strong>조현정</strong>
+        <span>UX/UI Designer</span>
+      </div>
+      <div class="contact-links" aria-label="포트폴리오 외부 링크">
+        <a class="contact-link contact-link-github" href="https://github.com/" target="_blank" rel="noopener noreferrer" data-say="GitHub 링크로 이동합니다.">
+          <span class="contact-link-icon" aria-hidden="true">GH</span>
+          <span>GitHub</span>
+        </a>
+        <a class="contact-link contact-link-figma" href="https://www.figma.com/" target="_blank" rel="noopener noreferrer" data-say="Figma 링크로 이동합니다.">
+          <span class="contact-link-icon" aria-hidden="true">Fg</span>
+          <span>Figma</span>
+        </a>
+        <a class="contact-link contact-link-notion" href="https://www.notion.so/" target="_blank" rel="noopener noreferrer" data-say="Notion Portfolio 링크로 이동합니다.">
+          <span class="contact-link-icon" aria-hidden="true">No</span>
+          <span>Notion Portfolio</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="project-modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-window-close></div>
+    <div class="browser-window" role="document">
+      <div class="browser-topbar" data-window-drag aria-label="Project window drag handle">
+        <div class="browser-title mono" id="modalBrowserTitle">CURIO 작업 수 BRIEF</div>
+        <div class="browser-controls" aria-label="브라우저 창 컨트롤">
+          <button type="button" aria-label="minimize" data-window-minimize>−</button>
+          <button type="button" aria-label="maximize" data-window-maximize>□</button>
+          <button type="button" aria-label="close" data-window-close>×</button>
+        </div>
+      </div>
+
+      <div class="modal-voice-caption" id="modalCaption" role="status" aria-live="polite">
+        <div class="voice-icon"><div class="mini-wave"><i></i><i></i><i></i><i></i></div></div>
+        <div>
+          <b class="caption-label mono">CURIO LIVE BRIEFING</b>
+          <p class="caption-text" id="modalCaptionText"></p>
+        </div>
+      </div>
+      <div class="modal-content">
+        <div class="modal-main">
+          <div class="modal-hero-mockup" id="modalMockup"></div>
+          <div class="modal-meta mono" id="modalMeta"></div>
+          <h3 id="modalTitle"></h3>
+          <p id="modalDesc"></p>
+          <div class="modal-sections">
+            <div><b>Issue Detected</b><p id="modalIssue"></p></div>
+            <div><b>Solution Applied</b><p id="modalSolution"></p></div>
+            <div><b>Role</b><p id="modalRole"></p></div>
+          </div>
+        </div>
+        <aside class="curio-summary">
+          <span class="chip">CURIO ANALYSIS</span>
+          <h4>요약 브리핑</h4>
+          <p id="modalSummary"></p>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <button class="window-dock" id="projectWindowDock" type="button" aria-hidden="true">
+    <span class="mono">CURIO 작업 수 WINDOW</span>
+    <b id="dockProjectTitle">Project Detail</b>
+  </button>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>

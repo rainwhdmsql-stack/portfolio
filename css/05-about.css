@@ -1,0 +1,98 @@
+.cards { display:grid; gap:20px; }
+.about-cards { grid-template-columns: repeat(3, 1fr); }
+.card { padding:32px; transition: transform .35s ease, box-shadow .35s ease; }
+.card:hover { transform: translateY(-8px); box-shadow:0 40px 90px rgba(16,17,22,.18); }
+.card h3 { margin:24px 0 14px; font-size:28px; letter-spacing:-.05em; line-height:1.15; }
+.card p { margin:0; color:var(--muted); line-height:1.75; font-weight:650; }
+
+.tool-panel {
+  margin-top:22px;
+  padding:32px;
+  display:grid;
+  grid-template-columns: minmax(340px, .8fr) minmax(0, 1.75fr);
+  gap:34px;
+  align-items:center;
+}
+.tool-copy h3 {
+  margin:16px 0 0;
+  max-width:620px;
+  font-size:28px;
+  line-height:1.35;
+  letter-spacing:-.055em;
+}
+.tool-panel p { margin:0; color:var(--muted); line-height:1.7; }
+.tool-grid {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  align-items:flex-start;
+  gap:12px;
+}
+.tool-icon {
+  position:relative;
+  width:auto;
+  min-width:74px;
+  max-width:124px;
+  min-height:88px;
+  border-radius:18px;
+  background:rgba(255,255,255,.66);
+  border:1px solid rgba(255,255,255,.82);
+  box-shadow:0 16px 34px rgba(16,17,22,.08);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:12px 14px 14px;
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.tool-icon:hover {
+  transform:translateY(-5px);
+  border-color:var(--curio-line);
+  box-shadow:0 24px 48px rgba(16,17,22,.13);
+}
+.tool-icon::before {
+  content:attr(data-tool-category);
+  position:absolute;
+  top:-8px;
+  left:50%;
+  transform:translateX(-50%);
+  height:16px;
+  padding:0 7px;
+  border-radius:999px;
+  background:var(--curio-soft);
+  color:var(--curio);
+  border:1px solid var(--curio-line);
+  font-family:var(--mono);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.04em;
+  line-height:16px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease, top .25s ease;
+  white-space:nowrap;
+}
+.tool-icon:hover::before { opacity:1; top:-12px; }
+.tool-icon b {
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:var(--dark);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:14px;
+  font-weight:1000;
+  letter-spacing:-.02em;
+}
+.tool-icon span {
+  color:#4f5560;
+  font-size:11px;
+  font-weight:900;
+  line-height:1.18;
+  text-align:center;
+  word-break:keep-all;
+  overflow-wrap:normal;
+  white-space:normal;
+}
